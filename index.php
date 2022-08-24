@@ -27,5 +27,5 @@ include "header.php";
         <p>I also have a page on <a href="./piracy">piracy</a> as it relates to the 3DS and the Nintendo Homebrew server, a brief guide for the <a href=".\nsui">New Super Ultimate Injector</a>, and a page on how to <a href="./sderrors">comprehensively check your SD card for errors</a>, which I would probably recommend doing before you start with any of these processes but that's just, like, my opinion, man. I also offer a <a href="./solution">guaranteed solution</a> to any problems you may be having, a page full of <a href="./what" target="_blank">explanations</a> and some <a href="./catalyst" target="_blank">starter kits</a> for hacking your console. Now with added <a href="issues">troubleshooting.</a>
         <br>This entire website should be considered a permanent WIP, but LOOK MA I HAVE CSS NOW.
 		<marquee>props to crc gang (also props to deprecated html elements that shouldn't work any more but do :lenny:)</marquee>
-    <p><div class="blue"><a href="contact.php">Contact me</a> if you have problems, suggestions or other feedback.</div>
+    <p><div class="blue"><a href="contact.htm">Contact me</a> if you have problems, suggestions or other feedback.</div>
 <? php include "footer.php"; ?>
