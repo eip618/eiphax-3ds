@@ -1,9 +1,11 @@
-<? php
+<?php
 $title = "NSUI Tutorial";
 $desc = "How to use NSUI for 3DS";
 include "header.php";
 ?>
-<? php include "nav.php"; ?>
+<?php
+include "nav.php";
+?>
         <div class="container">
         <div class="content">
             <center><h1>New Super Ultimate Injector usage guide</h1></center>
@@ -27,4 +29,6 @@ include "header.php";
             <br>Here is an example of what the database title screen import looks like on a console. It's pretty good, for something that takes no effort on the user's behalf.
             <p><img src="./img/nsui5.png"><br>
             <div class="blue">VC injects count as Home Menu titles. You may have 300 Home Menu titles at one time, system apps do count, and folders don't change the limit.</div>
-<? php include "footer.php"; ?>
+<?php
+include "footer.php";
+?>

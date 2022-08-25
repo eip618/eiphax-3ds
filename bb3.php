@@ -1,9 +1,11 @@
-<? php
+<?php
 $title = "BannerBomb3";
 $desc = "BB3 tutorial (deprecated)";
 include "header.php";
 ?>
-<? php include "nav.php"; ?>
+<?php
+include "nav.php";
+?>
         <div class="container">
         <div class="content">
             <center><h1>bannerbomb3</h1></center>
@@ -68,4 +70,6 @@ include "header.php";
 		</div>
 		-->
 		
-<? php include "footer-btn.php"; ?>
+<?php
+include "footer-btn.php";
+?>

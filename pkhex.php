@@ -1,9 +1,11 @@
-<? php
+<?php
 $title = "PKHeX Tutorial";
 $desc = "How to download and use PKHeX for the 3DS";
 include "header.php";
 ?>
-<? php include "nav.php"; ?>
+<?php
+include "nav.php";
+?>
         <div class="container">
         <div class="content">
             <center><h1>PKHeX</h1></center>
@@ -45,4 +47,6 @@ include "header.php";
                 <li>Once this succeeds, close Checkpoint, open your game, load your save and check your modifications succeeded.</li>
             </ol>
 		
-	<? php include "footer.php"; ?>
+<?php
+include "footer.php";
+?>

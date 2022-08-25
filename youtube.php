@@ -1,9 +1,11 @@
-<? php
+<?php
 $title = "youtube bad lol";
 $desc = "cancel is not allowed here";
 include "header.php";
 ?>
-<? php include "nav.php"; ?>
+<?php
+include "nav.php";
+?>
         <div class="container">
         <div class="content">
             <center><marquee><font size="32">video guides are bad</font></marquee></center>
@@ -14,4 +16,6 @@ include "header.php";
 		<br>if you're a youtube video guide creator and you are reading this page: you know why this page exists. i gave you a chance to change things and you did not.
 		<br>this is the future you chose.
 		
-<? php include "footer.php"; ?>
+<?php
+include "footer.php";
+?>

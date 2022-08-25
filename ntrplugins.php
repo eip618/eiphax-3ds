@@ -1,9 +1,11 @@
-<? php
+<?php
 $title = "NTR Plugins Tutorial";
 $desc = "How to install and use NTR Plugins";
 include "header.php";
 ?>
-<? php include "nav.php"; ?>
+<?php
+include "nav.php";
+?>
         <div class="container">
         <div class="content">
             <center><h1>NTR Plugin Guide</h1></center>
@@ -39,4 +41,6 @@ include "header.php";
 		<p> Q: This plugin doesn't work! <br /> A: Usually, this is a problem with the plugin. Try using another one. </p>
 		<p> Q: BootNTR crashes when I launch it! <br /> A: Luma3DS's official release is  broken with BootNTR. Please use the Nanquitas build linked <a href="https://github.com/Nanquitas/Luma3DS/releases"> here </a/>.</p>
 	
-<? php include "footer.php"; ?>
+<?php
+include "footer.php";
+?>

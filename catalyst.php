@@ -1,9 +1,11 @@
-<? php
+<?php
 $title = "Starter Kits";
 $desc = "3DS hacking on easy mode";
 include "header.php";
 ?>
-<? php include "nav.php"; ?>
+<?php
+include "nav.php";
+?>
         <div class="container">
         <div class="content">
             <center><h1>Hacking Starter Kits</h1></center>
@@ -17,4 +19,6 @@ document.write("This page was last modified on: " + document.lastModified +"");
 <br><a href="./kits/pichaxx-problem-solver.zip" target="_blank">PicHaxx problem solver</a>
 <br><a href="./kits/usm-problem-solver.zip" target="_blank">USM problem solver</a>
 <br><a href="./kits/ntrboot-problem-solver.zip" target="_blank">NTRboot problem solver</a></div>
-<? php include "footer.php"; ?>
+<?php
+include "footer.php";
+?>

@@ -1,4 +1,4 @@
-<? php
+<?php
 $title = "Defining Piracy for Practical Purposes";
 $desc = "You got sent here by rule 11, didn't you?";
 include "header.php";
@@ -55,4 +55,6 @@ function yarHar() {
 		<li>If your physical media becomes damaged, you must retain it in order to retain your license to the dump. You can't throw it away and still legally own the dump.</li>
         <li>Renting or buying a game in order to make a copy of it and return it to the store is piracy. I shouldn't have to say this.</li>
     </ul>
-<? php include "footer.php"; ?>
+<?php
+include "footer.php";
+?>

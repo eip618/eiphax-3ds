@@ -1,9 +1,11 @@
-<? php
+<?php
 $title = "Custom Themes Guide";
 $desc = "How to get custom themes on your 3DS using Anemone";
 include "header.php";
 ?>
-<? php include "nav.php"; ?>
+<?php
+include "nav.php";
+?>
         <div class="container">
         <div class="content">
             <center><h1>Custom Themes Guide</h1></center>
@@ -69,4 +71,6 @@ include "header.php";
             <li>Fix: Try deleting <code>/3ds/Anemone3ds/Cache</code> on your SD</li>
             </ul></div><br /><br /><br /><br /><br /><br /><br /><br />
             
-<? php include "footer.php"; ?>
+<?php
+include "footer.php";
+?>

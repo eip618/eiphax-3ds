@@ -1,9 +1,11 @@
-<? php
+<?php
 $title = "Luma Plugins tutorial";
 $desc = "How to install and run Luma Plugins on the 3DS";
 include "header.php";
 ?>
-<? php include "nav.php"; ?>
+<?php
+include "nav.php";
+?>
         <div class="container">
         <div class="content">
             <center><h1 id="luma3ds-plugin-loader-guide">Luma3ds Plugin Loader Guide</h1></center>
@@ -40,4 +42,6 @@ include "header.php";
             <h4 id="screen-doesnt-flash-and-plugin-doesnt-load"><strong>Screen doesn't flash and plugin doesn't load</strong></h4>
             <p>Fix: Check if you got the right titleid, if you're sure you did, try a different plugin</p></div><br/><br/><br/><br/>
 		
-<? php include "footer.php"; ?>
+<?php
+include "footer.php";
+?>

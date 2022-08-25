@@ -1,9 +1,11 @@
-<? php
+<?php
 $title = "Frogminer";
 $desc = "Frogminer tutorial (deprecated)";
 include "header.php";
 ?>
-<? php include "nav.php"; ?>
+<?php
+include "nav.php";
+?>
         <div class="container">
         <div class="content">
             <center><h1>frogminer: legacy method</h1></center>
@@ -117,4 +119,6 @@ include "header.php";
             <h3><a href="issues">Here!</a></h3>
             </div> -->
 		
-<? php include "footer-btn.php"; ?>
+<?php
+include "footer-btn.php";
+?>

@@ -1,9 +1,11 @@
-<? php
+<?php
 $title = "A Guaranteed Solution";
 $desc = "Can we fix it? Yes we can!";
 include "header.php";
 ?>
-<? php include "nav.php"; ?>
+<?php
+include "nav.php";
+?>
         <div class="container">
         <div class="content">
             <center><h1>A guaranteed solution to your problems</h1></center>
@@ -21,4 +23,6 @@ include "header.php";
                 <li>If it is hard for you to reverse parallel park, stop trying to reverse parallel park.</li>
             </ul>
             <p>I think by now you understand how easy it can be to solve any problem you have. Thank you for visiting eipHax.
-<? php include "footer.php"; ?>
+<?php
+include "footer.php";
+?>

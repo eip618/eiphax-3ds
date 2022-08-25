@@ -1,9 +1,11 @@
-<? php
+<?php
 $title = "AC:NL";
 $desc = "How to edit your AC:NL town";
 include "header.php";
 ?>
-<? php include "nav.php"; ?>
+<?php
+include "nav.php";
+?>
         <div class="container">
         <div class="content">
             <center><h1>AC:NL Save Editor</h1></center>
@@ -37,4 +39,6 @@ include "header.php";
                 <li>Load Checkpoint, select your game, select the memorable name you chose earlier, and select Restore:<p><img src="img/check6.png"><p>This will inject your save file back into the game, encrypted so the game can use it.</li>
                 <li>Once this succeeds, close Checkpoint, open your game, load your save and check your modifications succeeded.</li>
             </ol>
-<? php include "footer.php"; ?>
+<?php
+include "footer.php";
+?>

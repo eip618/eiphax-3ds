@@ -1,9 +1,11 @@
-<? php
+<?php
 $title = "TWLFix";
 $desc = "How to use the TWLFix utility";
 include "header.php";
 ?>
-<? php include "nav.php"; ?>
+<?php
+include "nav.php";
+?>
         <div class="container">
         <div class="content">
             <center><h1>TWLFix</h1></center>
@@ -65,4 +67,6 @@ include "header.php";
 			</ol>
 		<br>
 		</div>
-<? php include "footer-btn.php"; ?>
+<?php
+include "footer-btn.php";
+?>

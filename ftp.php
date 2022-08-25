@@ -1,9 +1,11 @@
-<? php
+<?php
 $title = "FTP Tutorial";
 $desc = "How to use FTP with your 3DS without getting viruses";
 include "header.php";
 ?>
-<? php include "nav.php"; ?>
+<?php
+include "nav.php";
+?>
         <div class="container">
         <div class="content">
             <center><h1></h1></center>
@@ -42,4 +44,6 @@ include "header.php";
 <p>Your 3DS and PC should be on the same network. FTPD sometimes refuses to work if your PC is on ethernet, while your 3DS is connected wirelessly.</p>
 <p>If you are having trouble staying connected, make sure your internet connection is stable. If for some reason WinSCP doesn't work for you, you can try another FTP client such as FileZilla.</p>
 		
-<? php include "footer.php"; ?>
+<?php
+include "footer.php";
+?>

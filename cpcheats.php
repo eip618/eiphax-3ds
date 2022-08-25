@@ -1,9 +1,11 @@
-<? php
+<?php
 $title = "Checkpoint Cheat Guide";
 $desc = "How to install and use Checkpoint cheats";
 include "header.php";
 ?>
-<? php include "nav.php"; ?>
+<?php
+include "nav.php";
+?>
         <div class="container">
         <div class="content">
             <center><h1>Checkpoint Cheat Guide</h1></center>
@@ -46,4 +48,6 @@ The latest release of Checkpoint, which can be found <a href="https://github.com
 <p>Q: The cheats button does not show up!<br />A: Your version of Checkpoint is outdated. Grab the latest release <a href="https://github.com/FlagBrew/Checkpoint/releases/latest">here.</a></p>
 <p>Q: How do I cheat on DS Games?<br />A: To use cheats on DS games, install them via <a href="https://universal-team.net/projects/universal-updater.html"> Universal Updater. </a></p>
 		
-<? php include "footer.php"; ?>
+<?php
+include "footer.php";
+?>

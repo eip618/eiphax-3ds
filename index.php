@@ -1,9 +1,11 @@
-<? php
+<?php
 $title = "eip's 3ds index";
 $desc = "a vaguely up to date introduction to 3ds homebrew and stuff";
 include "header.php";
 ?>
-<? php include "nav.php"; ?>
+<?php
+include "nav.php";
+?>
         <div class="container">
         <div class="content">
             <center><h1>eip's homebrew index: we /continuous integration/ now</h1>
@@ -28,4 +30,6 @@ include "header.php";
         <br>This entire website should be considered a permanent WIP, but LOOK MA I HAVE CSS NOW.
 		<marquee>props to crc gang (also props to deprecated html elements that shouldn't work any more but do :lenny:)</marquee>
     <p><div class="blue"><a href="contact.php">Contact me</a> if you have problems, suggestions or other feedback.</div>
-<? php include "footer.php"; ?>
+<?php
+include "footer.php";
+?>

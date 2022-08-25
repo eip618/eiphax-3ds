@@ -1,9 +1,11 @@
-<? php
+<?php
 $title = "signpost";
 $desc = "where to go and how to get cool stuff for your 3ds";
 include "header.php";
 ?>
-<? php include "nav.php"; ?>
+<?php
+include "nav.php";
+?>
         <div class="container">
         <div class="content">
             <center><h1>eip's signpost</h1></center>
@@ -129,4 +131,6 @@ include "header.php";
 	<p>
 				<!-- section end divs -->
             </div>
-<? php include "footer-btn.php"; ?>
+<?php
+include "footer-btn.php";
+?>

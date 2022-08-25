@@ -1,4 +1,4 @@
-<? php
+<?php
 $title = "3DS Fixer's Bible";
 $desc = "the holy bible of fixing a 3ds when it's hacked/being hacked";
 include "header.php";
@@ -6,7 +6,9 @@ include "header.php";
 	<!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<? php include "nav.php"; ?>
+<?php
+include "nav.php";
+?>
         <div class="container">
         <div class="content">
             <center><h1>eip's Troubleshooting Bible</h1></center>
@@ -204,7 +206,9 @@ include "header.php";
   </div>
   <!-- /#wrapper -->
 		
-<? php include "footer.php"; ?>
+<?php
+include "footer.php";
+?>
   <!-- BLANK CARD FOR SUBMITTING ADDITIONAL SOLUTIONS
 		Do not forget to replace the relevant elements based on the prior element and ordering.
 		These are e1 and collapseOne along with the title card number.

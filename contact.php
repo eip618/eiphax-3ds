@@ -1,9 +1,11 @@
-<? php
+<?php
 $title = "Contact Me";
 $desc = "contact me";
 include "header.php";
 ?>
-<? php include "nav.php"; ?>
+<?php
+include "nav.php";
+?>
         <div class="container">
         <div class="content">
             <center><h1>contact me</h1>
@@ -78,4 +80,6 @@ include "header.php";
 	required.add('Your_Message','NOT_EMPTY','Your Message');
 	required.add('AntiSpam','NOT_EMPTY','Anti-Spam Question');
 	</script>
-	<? php include "footer.php"; ?>
+<?php
+include "footer.php";
+?>

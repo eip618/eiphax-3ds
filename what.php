@@ -1,9 +1,11 @@
-<? php
+<?php
 $title = "what?";
 $desc = "Want information about the 3DS and custom firmware and how it all works? Look here.";
 include "header.php";
 ?>
-<? php include "nav.php"; ?>
+<?php
+include "nav.php";
+?>
         <div class="container">
         <div class="content">
             <center><h1>what?</h1></center>
@@ -111,4 +113,6 @@ include "header.php";
 				<p>As you can see, all these exploits work in combination with each other to do what we need them to do, though they don't do a lot by themselves. Obviously there are other exploit chains; these are examples.</div>
                 <p>NTRBoot is a strange one. Thanks to some of the work done to uncover Sighax, we noticed another thing: before attempting to boot, the bootloader checks: if a key combination is being held, AND if the shell is closed (the console is in sleep mode). If both these conditions are true, the bootloader tries to boot from an inserted NTR (old DS) cartridge. Combined with sighax, it allows stupidly easy bootloader access: you can tell the console to boot from the NTR cartridge, and the NTR cartridge tells the bootloader to load a payload (when the cartridge is flashed with b9s, our usual custom bootloader). You can even flash tools like Godmode9 to the cartridge, and boot straight to them via NTRBoot.
 				<p>We are, at this point, unsure of what NTRBoot was actually intended for. We assume it was some kind of "repair mode" implemented by Nintendo for service purposes, but we'll probably never know. To use NTRboot, you need a compatible flashcart. The NTRboot "exploit" is present on every 3DS Family system currently in the wild and will likely be present on every 3DS Family system to come, because for Nintendo to change the hardware board would be needlessly expensive.</div>
-<? php include "footer-btn.php"; ?>
+<?php
+include "footer-btn.php";
+?>

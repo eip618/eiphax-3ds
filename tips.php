@@ -1,9 +1,11 @@
-<? php
+<?php
 $title = "CFW tips";
 $desc = "What can I do with CFW that isn't piracy?";
 include "header.php";
 ?>
-<? php include "nav.php"; ?>
+<?php
+include "nav.php";
+?>
         <div class="container">
         <div class="content">
             <center><h1>what can I do with cfw?</h1></center>
@@ -59,4 +61,6 @@ include "header.php";
 <br>
 <br>
 <br>
-<? php include "footer.php"; ?>
+<?php
+include "footer.php";
+?>

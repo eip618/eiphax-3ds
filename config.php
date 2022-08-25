@@ -1,9 +1,11 @@
-<? php
+<?php
 $title = "3DS Config Generator";
 $desc = "Custom generator for Rosalina configs";
 include "header.php";
 ?>
-<? php include "nav.php"; ?>
+<?php
+include "nav.php";
+?>
 <style>
 #downloader { display: none }
 label, span { color: white }
@@ -154,4 +156,6 @@ function WriteConfig() {
 	downloader.click();
 }
 </script>
-<? php include "footer.php"; ?>
+<?php
+include "footer.php";
+?>

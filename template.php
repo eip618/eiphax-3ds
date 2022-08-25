@@ -1,9 +1,11 @@
-<? php
+<?php
 $title = "template lol";
 $desc = "ur mom";
 include "header.php";
 ?>
-<? php include "nav.php"; ?>
+<?php
+include "nav.php";
+?>
         <div class="container">
         <div class="content">
             <center><h1>template page</h1></center>
@@ -13,4 +15,6 @@ include "header.php";
 		<br>Feel free to use this page as a base for a pull request, and I'll check it over and work on it if it needs work.
 		<br>Fun fact: lemons aren't natural and are a hybrid of two other citrus fruits. Life didn't give us lemons. We made them ourselves.
 		
-<? php include "footer.php"; ?>
+<?php
+include "footer.php";
+?>

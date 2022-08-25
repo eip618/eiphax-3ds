@@ -1,9 +1,11 @@
-<? php
+<?php
 $title = "Fredminer";
 $desc = "Fredminer tutorial (deprecated)";
 include "header.php";
 ?>
-<? php include "nav.php"; ?>
+<?php
+include "nav.php";
+?>
         <div class="container">
         <div class="content">
             <center><h1>Fredminer</h1></center>
@@ -102,4 +104,6 @@ include "header.php";
 			<br>
 			<br>
 			-->
-<? php include "footer-btn.php"; ?>
+<?php
+include "footer-btn.php";
+?>

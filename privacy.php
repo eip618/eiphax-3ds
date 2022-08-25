@@ -1,9 +1,11 @@
-<? php
+<?php
 $title = "Privacy Statement";
 $desc = "It's really quite simple.";
 include "header.php";
 ?>
-<? php include "nav.php"; ?>
+<?php
+include "nav.php";
+?>
         <div class="container">
         <div class="content">
             <center><h1>privacy statement: the short version</h1></center>
@@ -16,4 +18,6 @@ include "header.php";
 		<br>I will not keep a copy of any data, however Google Analytics will cache your visit for 26 months.
 		<br>Per the GDPR, I am unable to use any IP addresses or other collected information to identify you as a unique user, or "natural person". This is because all of the information I receive is "in aggregate" and cannot be boiled down to the individual user level. As such, I am not required to have one of those annoying popups telling you about cookies. But I do have this page.
 		
-<? php include "footer.php"; ?>
+<?php
+include "footer.php";
+?>

@@ -1,9 +1,11 @@
-<? php
+<?php
 $title = "Site Navigation";
 $desc = "What did you expect here?";
 include "header.php";
 ?>
-<? php include "nav.php"; ?>
+<?php
+include "nav.php";
+?>
         <div class="container">
         <div class="content">
             <center><h1>Site Navigation</h1></center>
@@ -42,4 +44,6 @@ include "header.php";
 			<li><a href="./ "></li>
 			<li><a href="./ "></li> -->
 		</ul>
-<? php include "footer.php"; ?>
+<?php
+include "footer.php";
+?>

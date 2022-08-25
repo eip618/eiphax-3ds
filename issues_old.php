@@ -1,9 +1,11 @@
-<? php
+<?php
 $title = "Issues (even older)";
 $desc = "Troubleshooting 2 (deprecated)";
 include "header.php";
 ?>
-<? php include "nav.php"; ?>
+<?php
+include "nav.php";
+?>
         <div class="container">
         <div class="content">
             <center><h1>Issues</h1></center>
@@ -521,4 +523,6 @@ include "header.php";
 	<br>
 	<br>
 	<br>
-<? php include "footer.php"; ?>
+<?php
+include "footer.php";
+?>

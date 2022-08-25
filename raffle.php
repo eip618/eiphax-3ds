@@ -1,9 +1,11 @@
-<? php
+<?php
 $title = "valid smells lol";
 $desc = "hi valid's mom";
 include "header.php";
 ?>
-<? php include "nav.php"; ?>
+<?php
+include "nav.php";
+?>
         <div class="container">
         <div class="content">
             <center><h1>eip's random raffle</h1></center>
@@ -12,4 +14,6 @@ include "header.php";
 		<br><s>the raffle will run for the first week of June</s> the raffle has ended!
 		<br>congratulations @validusername16#9643! enjoy your r4i gold plus cartridge!
 		
-<? php include "footer.php"; ?>
+<?php
+include "footer.php";
+?>
