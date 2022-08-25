@@ -1,4 +1,4 @@
-<? php
+<?php
 $title = "Common SD operations and information";
 $desc = "Various information about how to troubleshoot SD issues.";
 include "header.php";
@@ -6,7 +6,9 @@ include "header.php";
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<? php include "nav.php"; ?>
+<?php
+include "nav.php";
+?>
         <div class="container">
         <div class="content">
             <center><h1>Common SD operations and information</h1></center>
@@ -161,4 +163,6 @@ include "header.php";
   </div>
   <!-- /#wrapper -->
 			
-<? php include "footer.php"; ?>
+<?php
+include "footer.php";
+?>
