@@ -19,8 +19,8 @@ include_once 'submit.php';
 <!-- Google recaptcha API library -->
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <!-- Contact form fields -->
-<table>
 <form action="" method="post" class="cnt-form">
+<table>
     <tr>
 	<td><div class="form-input">
         <label for="name">Name</label></td>
@@ -53,7 +53,6 @@ include_once 'submit.php';
     </div>
     <input type="submit" name="submit" class="btn" value="Submit">
 </form>
-</table>
 <p />
 <!-- Status message -->
 <?php if(!empty($statusMsg)){ ?>
