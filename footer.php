@@ -10,7 +10,7 @@
 		<li><a href="./signpost">Signpost</a></li>
 		<li><a href="./issues">Troubleshooting</a></li>
 		<li><a href="./donate">Donations</a></li>
-		<li><a href="./contact.htm">Contact</a></li>
+		<li><a href="./contact">Contact</a></li>
 		<li><a href="https://nx.eiphax.tech">Switch</a></li>
 	</ul>
 	</div>
