@@ -482,7 +482,7 @@ font-weight:normal;
   margin: 0 auto;
 }
 .container-flex{
-  width: 960px;
+  width: 80%;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -503,7 +503,7 @@ font-weight:normal;
 .badge {
   display: inline-flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   padding-top: 10px;
 }
 .nav {
@@ -690,16 +690,6 @@ a{
   background: #3c4454;
   box-shadow: 0 1px 1px rgba(0,0,0,0.125);
     }
-}
-
-.flex-right {
-  justify-content: space-between;
-  align-items: right;
-}
-
-.flex-left {
-  justify-content: space-between;
-  align-items: left;
 }
 
 /*!
