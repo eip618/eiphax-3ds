@@ -1,18 +1,9 @@
 		
 	<div class="footer">
-	<div class="container">
+	<div class="container-flex">
 	<div class="badge">
-	<img src="./img/spaghetti.svg" width="270px">
-	</div>
-	<div class="nav2">
-	<ul>
-		<li><a href="https://eiphax.tech/privacy" target="_blank">Privacy</a>
-		<li><a href="./signpost">Signpost</a></li>
-		<li><a href="./issues">Troubleshooting</a></li>
-		<li><a href="./donate">Donations</a></li>
-		<li><a href="./contact">Contact</a></li>
-		<li><a href="https://nx.eiphax.tech">Switch</a></li>
-	</ul>
+	<div class="logo flex-left"><h2>eipHax</h2></div>
+	<div class="flex-right"><img src="./img/spaghetti.svg" width="270px"></div>
 	</div>
 	</div>
 	</div>

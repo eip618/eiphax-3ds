@@ -691,6 +691,16 @@ a{
     }
 }
 
+.flex-right {
+  justify-content: space-between;
+  align-items: right;
+}
+
+.flex-left {
+  justify-content: space-between;
+  align-items: left;
+}
+
 /*!
  * Adapted with permission from Zeta.
  * Parts of this stylesheet are used under license from Bootstrap, complying with the MIT license:
