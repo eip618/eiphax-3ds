@@ -10,7 +10,7 @@ include "nav.php";
         <div class="content">
             <center><h1>Checkpoint Cheat Guide</h1></center>
             <hr>
-        <p>Here's a short guide on how to use Checkpoint cheats. Credits to @kriegxd on discord for images and base text.
+        <p>Here's a short guide on how to use Checkpoint cheats. Credits to @Krieg#1473 for images and base text.
 		<p>Sharkive used to be used for cheats. As of the time of writing, Checkpoint can now be used for cheats too, and Sharkive has been deprecated, so Checkpoint should be used. If you want to use NTR Plugins for cheats, you should check out <a href="https://3ds.eiphax.tech/ntrplugins.html"> this guide</a> written by yours truly.
 <p>Required:
 <br>Luma 10.2.1 or above </br> 

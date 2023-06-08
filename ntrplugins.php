@@ -10,7 +10,7 @@ include "nav.php";
         <div class="content">
             <center><h1>NTR Plugin Guide</h1></center>
             <hr>
-        <p> This is a guide on how to use Boot NTR Selector to use plugins and cheats for games. If you want to use Checkpoint for cheats, you should check out <a href="https://3ds.eiphax.tech/cpcheats.html"> this guide</a> written by yours truly. Guide written by kriegxd on Discord. </p>
+        <p> This is a guide on how to use Boot NTR Selector to use plugins and cheats for games. If you want to use Checkpoint for cheats, you should check out <a href="https://3ds.eiphax.tech/cpcheats.html"> this guide</a> written by yours truly. Guide written by Krieg#1473 on Discord. </p>
 		<h3> Required: </h3>
 		<p> The latest release of <a href="https://github.com/Nanquitas/BootNTR/releases">Boot NTR Selector.</a> </p>
 		<p> A Luma version of 10.2.1 or above. </p>
