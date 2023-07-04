@@ -55,7 +55,7 @@ include "nav.php";
 					<li><a href="https://3ds.hacks.guide/region-changing" target="_blank">Region change</a> your console. This is LIKELY to have unintended consequences and is not recommended under normal circumstances. eShop functionality generally breaks afterwards, and Luma3DS already grants region-free gameplay.</li>
 					<li>Use old flashcarts with the extended cartridge whitelist. Enabled by Luma3DS by default.</li>
 					<li>Use <a href="https://github.com/mtheall/ftpd/releases/latest" target="_blank">ftpd</a> on your console with a client like <a href="https://winscp.net/eng/download.php" target="_blank">WinSCP</a> to move files between console and PC over Wi-Fi.</li>
-					<li><a href="https://axities.github.io/" target="_blank">Edit your Home Menu</a>. <b>ADVANCED USERS ONLY. This is complex.</b></li>
+					<li><a href="https://3ds.codeberg.page/homemenu/" target="_blank">Edit your Home Menu</a>. <b>ADVANCED USERS ONLY. This is complex.</b></li>
 				</ol></li>
 			</ol>
 <br>
