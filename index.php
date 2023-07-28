@@ -8,8 +8,7 @@ include "nav.php";
 ?>
         <div class="container">
         <div class="content">
-            <center><h1>eip's homebrew index: we /continuous integration/ now</h1>
-            <div class="little">look ma, i made tls authenticate over http</div></center>
+            <center><h1>eip's homebrew index: we're in the endgame now</h1>
             <hr>
         <p>
         Hello and welcome to Eip's Homebrew Index.
@@ -21,7 +20,7 @@ include "nav.php";
 		<br>Thanks to all my friends on Nintendo Homebrew for helping me with the information here, thanks to Jisagi for some Javascript, and thanks to Zeta for letting me (poorly) steal their CSS.
 		<p>Here is a <a href="./privacy">privacy statement</a> for this website.
         <p>The first, and possibly most important link, is <a href="http://3ds.hacks.guide" target=”_blank”>The NH Server Guide.</a> Our guide is regularly updated, verified to be accurate and is comprehensive across all software and hardware versions.<br>Our guide is used primarily for the purpose of installing custom firmware (CFW). CFW is a beefier, better, more stable version of homebrew, so there's almost no reason to stay on homebrew-only.
-		<p>New Browserhax got murdered with the release of 11.15. Seedminer is the go-to method for firmware 11.15, you can see the guide for using it <a href="http://3ds.hacks.guide" target=”_blank”>here</a>.
+		<p>a lot of the existing/dominant methods have been superseded or murdered by recent changes to the 3ds OS. again i stress, please <a href="http://3ds.hacks.guide" target=”_blank”>check the guide</a> for the latest method for your firmware and hardware combination.
 		
         <p><a href="./tips" target=”_blank”>What can I do with CFW?</a>
         <p>

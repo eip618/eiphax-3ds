@@ -113,6 +113,23 @@ include "nav.php";
 				<p>As you can see, all these exploits work in combination with each other to do what we need them to do, though they don't do a lot by themselves. Obviously there are other exploit chains; these are examples.</div>
                 <p>NTRBoot is a strange one. Thanks to some of the work done to uncover Sighax, we noticed another thing: before attempting to boot, the bootloader checks: if a key combination is being held, AND if the shell is closed (the console is in sleep mode). If both these conditions are true, the bootloader tries to boot from an inserted NTR (old DS) cartridge. Combined with sighax, it allows stupidly easy bootloader access: you can tell the console to boot from the NTR cartridge, and the NTR cartridge tells the bootloader to load a payload (when the cartridge is flashed with b9s, our usual custom bootloader). You can even flash tools like Godmode9 to the cartridge, and boot straight to them via NTRBoot.
 				<p>We are, at this point, unsure of what NTRBoot was actually intended for. We assume it was some kind of "repair mode" implemented by Nintendo for service purposes, but we'll probably never know. To use NTRboot, you need a compatible flashcart. The NTRboot "exploit" is present on every 3DS Family system currently in the wild and will likely be present on every 3DS Family system to come, because for Nintendo to change the hardware board would be needlessly expensive.</div>
+				<p>
+            <p><button class="btn-toggle-visibility" data-target="#sec7">The Endgame</button>
+				<div class="box hidden" id="sec7"><p>We are approaching the 3DS end of life (EoL), as evidenced by the recent shutdown of the 3DS eShop.
+				<br>Historically and practically speaking, homebrew developers and console producers/licensors have always been in a 'cat and mouse' game, where the homebrew devs try to make use of exploits to gain more system access, and the console developers try to patch those exploits to stop them.
+				<br>Every new exploit used by homebrew developers gives more context to console developers as to vulnerabilities to patch - effectively, every new exploit used is 'burned', because using it makes it obvious to console developers how it works and what to patch.
+				<br>Nintendo's changes in 3DS firmware version 11.17 killed bb3, which was a fairly major exploit and one of the last remaining exploits that did not require an additional purchase and worked on almost all firmware versions. They left a number of exploits open (leading to things like super-skaterhax and kartminer/kartdlphax), but a lot of the contemporary CFW install paths relied on bb3.
+				<br>super-skaterhax is only applicable to certain firmware/hardware combinations, kartminer/kartdlphax requires a copy of MK7 which not everyone has, and seedminer is in a weird position - bb3 can't be used on 11.17, but firmwares before 11.17 cannot use the friends list to complete the first part of the process.
+				<br>Anyway, what all this means is the following:
+				<br><ul>
+					<li>Seedminer is not relevant any more on 11.17</li>
+					<li>New methods exist for 11.17 however they are not applicable across the entire firmware/hardware spectrum</li>
+					<li>The game of 'cat and mouse' is drawing to a close: nintendo doesn't want to officially EoL the console in case there are more exploits in the community's pockets, and the community doesn't want to release any big new exploits in case Nintendo patches them before EoL</li>
+					<li>ntrboot, which works across the entire FW/HW spectrum, is now a primary method for installing CFW, but requires a flashcart that is flashed with ntrboot. some flashcarts come preflashed, some require flashing via the use of another hacked console</li>
+				</ul>
+				<br>We are in unknown waters here, and it is sort of a mexican standoff. The community and Nintendo are both pointing guns at each other, and nobody wants to shoot first.
+				</div>
+
 <?php
 include "footer-btn.php";
 ?>
