@@ -19,3 +19,6 @@
 
 </div>
 </div>
+<div class="dead">unfortunately, a lot of the information on here will be <b>outdated</b>. the most up to date and accurate information can be found at <a href="https://wiki.hacks.guide">the wiki</a> and <a href="https://hacks.guide">the guide</a>.
+<br>the information here will continue to be served for a) backup/redundancy and b) archival.</div>
+<br>
