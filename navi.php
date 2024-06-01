@@ -13,7 +13,6 @@ include "nav.php";
         <p><ul>
 			<li><a href="./acnl">Animal Crossing: New Leaf hacking guide</li>
 			<li><a href="./bb3">BannerBomb3 guide</li>
-			<li><a href="./catalyst">Starter packs</li>
 			<li><a href="./config">Luma Config generator</li>
 			<li><a href="./contact.htm">Contact form</li>
 			<li><a href="./cpcheats">Checkpoint cheats guide</li>
