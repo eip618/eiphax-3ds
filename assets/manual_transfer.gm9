@@ -1,75 +1,198 @@
-#Manual ctrnand Transfer Script
-#Use Cases:
-#Provide your own console uniques files for a ctrtransfer
-#Do a complete replacement of the 3DS ctrnand
-#How to use:
-#By default the script tries to fetch console uniques
-#from essential.exefs otherwise it will try to fetch them
-#from /gm9/out/backup/ in the SD card
+# Manual CTRTransfer Script
+# A heavily-tweaked chimera of the original manual transfer script and the Lazarus3DS script.
+# Attempts to revive a damaged NAND with a donor CTRNAND.
+# last changed: 2024-08-11
+# author: AnalogMan, fox8091, StarlitSkies
 
-#LAST UPDATED 2021/01/03
+# Tell user what script does and ask for confirmation
+set ERRORMSG "Script aborted by user."
+ask "This script overwrites the entire CTRNAND\nwith a known working copy of that data.\nIt will try to keep all unique files intact\n but everything already missing will stay missing.\n \nOnly use this script on consoles that will not boot.\n \nContinue?"
+
+# Check that essentials.exefs exists as backup
+# If it doesn't, check for backup essentials.exefs in 0:/gm9/out. If that doesn't exist either, check for backup files in 0:/gm9/in instead
+# If any console uniques are missing, immediately end script - this isn't Lazarus, nor should it be
 
 find -o -s S:/essential.exefs ESSENTIAL
 
 if chk $[ESSENTIAL] ""
-    echo "essential.exefs in sysnand virtual is not accesible, using fallback folder!"
-    find -o -s $[GM9OUT]/essential.exefs ESSENTIAL
+    echo "essential.exefs in [S:] SYSNAND VIRTUAL is inaccessible.\nUsing backup essential.exefs instead."
+    if not find -o -s $[GM9OUT]/essential.exefs ESSENTIAL
+		echo "Backup essential.exefs not found.\Using backup files from 0:/gm9/in."
+		set FALLBACKFILES 1
 end
 
 if chk -u $[ESSENTIAL] ""
     imgmount $[ESSENTIAL]
     set BACKUP $[GM9OUT]/backup 
     mkdir $[BACKUP]
-    
-    
-    cp -w G:/frndseed $[BACKUP]/LocalFriendCodeSeed_B 
-    cp -w G:/hwcal0 $[BACKUP]/HWCAL0.dat
-    cp -w G:/hwcal1 $[BACKUP]/HWCAL1.dat
-    cp -w G:/movable $[BACKUP]/movable.sed 
-    cp -w G:/secinfo $[BACKUP]/SecureInfo_A
- 
+	cp -n -w G:/frndseed $[BACKUP]/LocalFriendCodeSeed_B 
+    cp -n -w G:/hwcal0 $[BACKUP]/HWCAL0.dat
+    cp -n -w G:/hwcal1 $[BACKUP]/HWCAL1.dat
+    cp -n -w G:/movable $[BACKUP]/movable.sed 
+    cp -n -w G:/secinfo $[BACKUP]/SecureInfo_A
     imgumount
-    
     cp $[ESSENTIAL] $[BACKUP]/essential.exefs
 end
 
-set ERRORMSG "Missing console unique files in fallback folder!"
+set ERRORMSG "Could not find console uniques!"
 
-find $[BACKUP]/LocalFriendCodeSeed_B SEED 
-find $[BACKUP]/HWCAL0.dat HWCAL0     
-find $[BACKUP]/HWCAL1.dat HWCAL1     
-find $[BACKUP]/movable.sed MOVABLE     
-find $[BACKUP]/SecureInfo_A SECINFO 
-
-set ERRORMSG "No ctrnand image found or selected"
-
-if chk $[ONTYPE] "N3DS"
-    filesel "Select ctrnand image to use" $[GM9OUT]/*_ctrtransfer_n3ds.bin IMAGE
+if chk -u $[FALLBACKFILES] 1
+	find $[BACKUP]/LocalFriendCodeSeed_B SEED 
+	find $[BACKUP]/HWCAL0.dat HWCAL0     
+	find $[BACKUP]/HWCAL1.dat HWCAL1     
+	find $[BACKUP]/movable.sed MOVABLE
+	find $[BACKUP]/SecureInfo_A SECINFO
 else
-    filesel "Select ctrnand image to use" $[GM9OUT]/*_ctrtransfer_o3ds.bin IMAGE
+	find 0:/gm9/in/LocalFriendCodeSeed_B SEED
+	find 0:/gm9/in/HWCAL0.dat HWCAL0
+	find 0:/gm9/in/HWCAL1.dat HWCAL1
+	find 0:/gm9/in/movable.sed MOVABLE
+	find 0:/gm9/in/SecureInfo_A SECINFO
+
+set ERRORMSG "No valid CTRNAND image(s) found in 0:/gm9/out."
+if chk $[ONTYPE] "N3DS"
+	find $[GM9OUT]/*_ctrtransfer_n3ds.bin NULL
+else
+	find $[GM9OUT]/*_ctrtransfer_o3ds.bin NULL
+
+set ERRORMSG "No CTRNAND image was selected."
+if chk $[ONTYPE] "N3DS"
+    filesel "Select the CTRNAND image to use." $[GM9OUT]/*_ctrtransfer_n3ds.bin IMAGE
+else
+    filesel "Select the CTRNAND image to use." $[GM9OUT]/*_ctrtransfer_o3ds.bin IMAGE
 end
 
-set ERRORMSG "Cancelled by user"
+# Prompt for permission
+set ERRORMSG "Script aborted by user."
+allow -a S:
 
-ask "The scripts is about to write to ctrnand\ncontinue?"
-allow S:
-set ERRORMSG "Failed injecting ctrnand image"
-inject -n $[IMAGE] S:/ctrnand_full.bin@0
-set ERRORMSG "Failed copying LocalFriendCodeSeed_B"
+set ERRORMSG ""
+
+# Preserve all other important console-unique files, to be restored after transfer
+# Copying file needed to read and play already installed content on SD
+cp -w -o -s -n 1:/dbs/ticket.db 0:/pit/ticket.db
+
+# Attempt to copy sysdata files to SD for restoring later
+cp -w -o -s -n 1:/data/$[SYSID0]/sysdata/00010017/00000000 0:/pit/configsave.bin
+cp -w -o -s -n 1:/data/$[SYSID0]/sysdata/00010032/00000000 0:/pit/friendsave.bin
+cp -w -o -s -n 1:/data/$[SYSID0]/sysdata/0001000f/00000000 0:/pit/seedsave.bin
+cp -w -o -s -n 1:/data/$[SYSID0]/sysdata/00010022/00000000 0:/pit/activitylog.bin
+
+# Attempt to get system app sysdata
+find -o -s 1:/data/$[SYSID0]/sysdata/000202?8 MIIPLAZA
+set MIIPLAZA $[MIIPLAZA]/00000000
+cp -w -o -s -n $[MIIPLAZA] 0:/pit/miiplaza.bin
+find -o -s 1:/data/$[SYSID0]/sysdata/000202?d FACERAIDERS
+set FACERAIDERS $[FACERAIDERS]/00000000
+cp -w -o -s -n $[FACERAIDERS] 0:/pit/faceraiders.bin
+find -o -s 1:/data/$[SYSID0]/sysdata/000202?e ARGAMES
+set ARGAMES $[ARGAMES]/00000000
+cp -w -o -s -n $[ARGAMES] 0:/pit/argames.bin
+
+# Attempt to copy extdata files to SD for restoring later
+cp -w -o -s -n 1:/data/$[SYSID0]/extdata/00048000/f0000001 0:/pit/01 # Photos
+cp -w -o -s -n 1:/data/$[SYSID0]/extdata/00048000/f0000002 0:/pit/02 # Sounds
+cp -w -o -s -n 1:/data/$[SYSID0]/extdata/00048000/f000000b 0:/pit/0b # MiiMaker, Game Coins, etc.
+
+# Overwrite CTRNAND with CTRTransfer image and then restore system uniques
+set ERRORMSG "Failed to overwrite CTRNAND with image."
+cp -n -w $[IMAGE] S:/ctrnand_full.bin
+set ERRORMSG "Restoring LocalFriendCodeSeed_B failed."
 cp -n -w $[SEED] 1:/rw/sys/LocalFriendCodeSeed_B
-set ERRORMSG "Failed copying SecureInfo_A"
+set ERRORMSG "Restoring SecureInfo_A failed."
 cp -n -w $[SECINFO] 1:/rw/sys/SecureInfo_A
-set ERRORMSG "Failed copying HWCAL0.dat"
+set ERRORMSG "Restoring HWCAL0.dat failed."
 cp -n -w $[HWCAL0] 1:/ro/sys/HWCAL0.dat
-set ERRORMSG "Failed copying HWCAL1.dat"
+set ERRORMSG "Restoring HWCAL1.dat failed."
 cp -n -w $[HWCAL1] 1:/ro/sys/HWCAL1.dat
-set ERRORMSG "Failed copying movable.sed"
+set ERRORMSG "Restoring movable.sed failed."
 cp -n -w $[MOVABLE] 1:/private/movable.sed
-set ERRORMSG "Failed to fix sysnand ctrnand cmacs for dbs"
+
+# Create SecureInfo_C if there's a region difference between SecureInfo_A and CVer
+if find 1:/title/000400db/00017202
+	set CVREG 0
+elif find 1:/title/000400db/00017302
+	set CVREG 1
+elif find 1:/title/000400db/00017102
+	set CVREG 2
+elif find 1:/title/000400db/00017402
+	set CVREG 4
+elif find 1:/title/000400db/00017502
+	set CVREG 5
+elif find 1:/title/000400db/00017602
+	set CVREG 6
+end
+fget 1:/rw/sys/SecureInfo_A@100:1 SIREG
+
+if chk -u $[CVREG] $[SIREG]
+	cp -w -o -s -n 1:/rw/sys/SecureInfo_A 1:/rw/sys/SecureInfo_C
+	fset 1:/rw/sys/SecureInfo_C@100 $[CVREG]
+end
+
+# Restore all other preserved data
+# First, verify ticket.db has appropriate tickets
+if find 0:/pit/ticket.db NULL
+	imgmount 0:/pit/ticket.db
+	if find T:/system/0004003000008202.????????.tik NULL
+		set TIKREG 0
+	elif find T:/system/0004003000008F02.????????.tik NULL
+		set TIKREG 1
+	elif find T:/system/0004003000009802.????????.tik NULL
+		set TIKREG 2
+	elif find T:/system/000400300000A102.????????.tik NULL
+		set TIKREG 4
+	elif find T:/system/000400300000A902.????????.tik NULL
+		set TIKREG 5
+	elif find T:/system/000400300000B102.????????.tik NULL
+		set TIKREG 6
+	end
+	imgumount
+end
+
+# Attempt restoring ticket.db if it has appropriate tickets
+if chk $[CVREG] $[TIKREG]
+	cp -w -o -s -n 0:/pit/ticket.db 1:/dbs/ticket.db
+end
+
+cp -w -o -s -n 0:/pit/seedsave.bin 1:/data/$[SYSID0]/sysdata/0001000f/00000000
+cp -w -o -s -n 0:/pit/configsave.bin 1:/data/$[SYSID0]/sysdata/00010017/00000000
+cp -w -o -s -n 0:/pit/friendsave.bin 1:/data/$[SYSID0]/sysdata/00010032/00000000
+cp -w -o -s -n 0:/pit/activitylog.bin 1:/data/$[SYSID0]/sysdata/00010022/00000000
+
+# Restore system app sysdata
+if chk $[CVREG] 00
+    set CHR 0
+elif chk $[CVREG] 01
+    set CHR 1
+elif chk $[CVREG] 02
+    set CHR 2
+elif chk $[CVREG] 04
+    set CHR 6
+elif chk $[CVREG] 05
+    set CHR 7
+elif chk $[CVREG] 06
+    set CHR 8
+end
+cp -w -o -s -n 0:/pit/miiplaza.bin 1:/data/$[SYSID0]/sysdata/000202$[CHR]8/00000000
+cp -w -o -s -n 0:/pit/faceraiders.bin 1:/data/$[SYSID0]/sysdata/000202$[CHR]d/00000000
+cp -w -o -s -n 0:/pit/argames.bin 1:/data/$[SYSID0]/sysdata/000202$[CHR]e/00000000
+
+# Restore shared extdata
+cp -w -o -s -n 0:/pit/01 1:/data/$[SYSID0]/extdata/00048000/f0000001 # Photos
+cp -w -o -s -n 0:/pit/02 1:/data/$[SYSID0]/extdata/00048000/f0000002 # Sounds
+cp -w -o -s -n 0:/pit/0b 1:/data/$[SYSID0]/extdata/00048000/f000000b # MiiMaker, Game Coins, etc.
+
+# Fix SYSNAND CTRNAND CMACs
+set ERRORMSG "Failed to fix 1:/dbs CMACs."
 fixcmac 1:/dbs
-set ERRORMSG "Failed to fix sysnand ctrnand cmacs for data"
+set ERRORMSG "Failed to fix 1:/data CMACs."
 fixcmac 1:/data
-set ERRORMSG "Failed to fix sysnand ctrnand cmacs for private"
+set ERRORMSG "Failed to fix 1:/private CMACs."
 fixcmac 1:/private
 
-echo "Manual Ctrnand transfer done successfully"
+# Wrap up
+set ERRORMSG "Reboot canceled."
+ask "Manual CTRTransfer complete.\n \nRemove backup files and reboot now?"
+rm -o -s 0:/pit
+rm -o -s 0:/gm9/scripts/manual_transfer.gm9
+reboot
