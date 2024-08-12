@@ -19,6 +19,7 @@ if chk $[ESSENTIAL] ""
     if not find -o -s $[GM9OUT]/essential.exefs ESSENTIAL
 		echo "Backup essential.exefs not found.\Using backup files from 0:/gm9/in."
 		set FALLBACKFILES 1
+	end
 end
 
 if chk -u $[ESSENTIAL] ""
@@ -49,11 +50,13 @@ else
 	find 0:/gm9/in/movable.sed MOVABLE
 	find 0:/gm9/in/SecureInfo_A SECINFO
 
+end
 set ERRORMSG "No valid CTRNAND image(s) found in 0:/gm9/out."
 if chk $[ONTYPE] "N3DS"
 	find $[GM9OUT]/*_ctrtransfer_n3ds.bin NULL
 else
 	find $[GM9OUT]/*_ctrtransfer_o3ds.bin NULL
+end
 
 set ERRORMSG "No CTRNAND image was selected."
 if chk $[ONTYPE] "N3DS"
