@@ -112,17 +112,18 @@ set ERRORMSG "Restoring movable.sed failed."
 cp -n -w $[MOVABLE] 1:/private/movable.sed
 
 # Create SecureInfo_C if there's a region difference between SecureInfo_A and CVer
-if find 1:/title/000400db/00017202
+set ERRORMSG ""
+if find 1:/title/000400db/00017202 NULL
 	set CVREG 0
-elif find 1:/title/000400db/00017302
+elif find 1:/title/000400db/00017302 NULL
 	set CVREG 1
-elif find 1:/title/000400db/00017102
+elif find 1:/title/000400db/00017102 NULL
 	set CVREG 2
-elif find 1:/title/000400db/00017402
+elif find 1:/title/000400db/00017402 NULL
 	set CVREG 4
-elif find 1:/title/000400db/00017502
+elif find 1:/title/000400db/00017502 NULL
 	set CVREG 5
-elif find 1:/title/000400db/00017602
+elif find 1:/title/000400db/00017602 NULL
 	set CVREG 6
 end
 fget 1:/rw/sys/SecureInfo_A@100:1 SIREG
