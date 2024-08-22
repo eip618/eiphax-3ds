@@ -114,23 +114,23 @@ cp -n -w $[MOVABLE] 1:/private/movable.sed
 # Create SecureInfo_C if there's a region difference between SecureInfo_A and CVer
 set ERRORMSG ""
 if find 1:/title/000400db/00017202 NULL
-	set CVREG 0
+	set CVREG 00
 elif find 1:/title/000400db/00017302 NULL
-	set CVREG 1
+	set CVREG 01
 elif find 1:/title/000400db/00017102 NULL
-	set CVREG 2
+	set CVREG 02
 elif find 1:/title/000400db/00017402 NULL
-	set CVREG 4
+	set CVREG 04
 elif find 1:/title/000400db/00017502 NULL
-	set CVREG 5
+	set CVREG 05
 elif find 1:/title/000400db/00017602 NULL
-	set CVREG 6
+	set CVREG 06
 end
 fget 1:/rw/sys/SecureInfo_A@100:1 SIREG
 
 if chk -u $[CVREG] $[SIREG]
 	cp -w -o -s -n 1:/rw/sys/SecureInfo_A 1:/rw/sys/SecureInfo_C
-	fset 1:/rw/sys/SecureInfo_C@100 $[CVREG]
+	fset 1:/rw/sys/SecureInfo_C@100:1 $[CVREG]
 end
 
 # Restore all other preserved data
