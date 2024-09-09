@@ -1,30 +1,31 @@
 # Manual CTRTransfer Script
 # A heavily-tweaked chimera of the original manual transfer script and the Lazarus3DS script.
 # Attempts to revive a damaged NAND with a donor CTRNAND.
-# last changed: 2024-08-11
+# last changed: 2024-09-08
 # author: AnalogMan, fox8091, StarlitSkies
 
 # Tell user what script does and ask for confirmation
 set ERRORMSG "Script aborted by user."
 ask "This script overwrites the entire CTRNAND\nwith a known working copy of that data.\nIt will try to keep all unique files intact\n but everything already missing will stay missing.\n \nOnly use this script on consoles that will not boot.\n \nContinue?"
 
-# Check that essentials.exefs exists as backup
-# If it doesn't, check for backup essentials.exefs in 0:/gm9/out. If that doesn't exist either, check for backup files in 0:/gm9/in instead
+# Check that essentials.exefs exists as backup, mount it, and extract uniques
+# If it doesn't, check for backup essentials.exefs in 0:/gm9/out, mount it, and extract uniques
+# If that doesn't exist either, check for already-extracted uniques in 0:/gm9/in instead
 # If any console uniques are missing, immediately end script - this isn't Lazarus, nor should it be
 
-find -o -s S:/essential.exefs ESSENTIAL
-
-if chk $[ESSENTIAL] ""
-    echo "essential.exefs in [S:] SYSNAND VIRTUAL is inaccessible.\nUsing backup essential.exefs instead."
-    if not find -o -s $[GM9OUT]/essential.exefs ESSENTIAL
-		echo "Backup essential.exefs not found.\Using backup files from 0:/gm9/in."
-		set FALLBACKFILES 1
+if not find S:/essential.exefs ESSENTIAL
+    echo "Note: essential.exefs not found.\nUsing backup essential.exefs in 0:/gm9/out instead.\n\nPress A to continue."
+    if not find $[GM9OUT]/essential.exefs ESSENTIAL
+		echo "Note: Backup essential.exefs not found.\nUsing extracted files from 0:/gm9/in instead.\n\nPress A to continue."
 	end
 end
 
+set ERRORMSG "Console unique(s) not found.\nThis script will not run unless all console uniques exist."
+
 if chk -u $[ESSENTIAL] ""
+	# this is if either essentials.exefs exists
     imgmount $[ESSENTIAL]
-    set BACKUP $[GM9OUT]/backup 
+	set BACKUP $[GM9OUT]/backup
     mkdir $[BACKUP]
 	cp -n -w G:/frndseed $[BACKUP]/LocalFriendCodeSeed_B 
     cp -n -w G:/hwcal0 $[BACKUP]/HWCAL0.dat
@@ -32,26 +33,22 @@ if chk -u $[ESSENTIAL] ""
     cp -n -w G:/movable $[BACKUP]/movable.sed 
     cp -n -w G:/secinfo $[BACKUP]/SecureInfo_A
     imgumount
-    cp $[ESSENTIAL] $[BACKUP]/essential.exefs
-end
-
-set ERRORMSG "Could not find console uniques!"
-
-if chk -u $[FALLBACKFILES] 1
+    cp -n -w $[ESSENTIAL] $[BACKUP]/essential.exefs
 	find $[BACKUP]/LocalFriendCodeSeed_B SEED 
 	find $[BACKUP]/HWCAL0.dat HWCAL0     
 	find $[BACKUP]/HWCAL1.dat HWCAL1     
 	find $[BACKUP]/movable.sed MOVABLE
 	find $[BACKUP]/SecureInfo_A SECINFO
 else
+	# this is if neither essentials.exefs exists. note it is gm9/in, not gm9/out
 	find 0:/gm9/in/LocalFriendCodeSeed_B SEED
 	find 0:/gm9/in/HWCAL0.dat HWCAL0
 	find 0:/gm9/in/HWCAL1.dat HWCAL1
 	find 0:/gm9/in/movable.sed MOVABLE
 	find 0:/gm9/in/SecureInfo_A SECINFO
-
 end
-set ERRORMSG "No valid CTRNAND image(s) found in 0:/gm9/out."
+
+set ERRORMSG "No valid CTRNAND images found in 0:/gm9/out."
 if chk $[ONTYPE] "N3DS"
 	find $[GM9OUT]/*_ctrtransfer_n3ds.bin NULL
 else
@@ -66,22 +63,26 @@ else
 end
 
 # Prompt for permission
-set ERRORMSG "Script aborted by user."
+set ERRORMSG "Script denied permissions by user."
 allow -a S:
 
 set ERRORMSG ""
+if ask "Also restore non-critical data?\nThis includes things like the friends list and activity log,\nwhich would normally be reset.\n\nThis is usually safe, but may carry\na risk of preserving file corruption."
+	set OPTRESTORE 1
+else
+	set OPTRESTORE 0
+	echo "Backups of this data will be preserved.\n\nIf you wish to restore them manually later on,\nthe files will be inside 0:/pit.\n\nPress A to continue."
+end
 
-# Preserve all other important console-unique files, to be restored after transfer
-# Copying file needed to read and play already installed content on SD
-cp -w -o -s -n 1:/dbs/ticket.db 0:/pit/ticket.db
 
+# Preserve all other important console-unique data, to be restored after transfer
 # Attempt to copy sysdata files to SD for restoring later
 cp -w -o -s -n 1:/data/$[SYSID0]/sysdata/00010017/00000000 0:/pit/configsave.bin
 cp -w -o -s -n 1:/data/$[SYSID0]/sysdata/00010032/00000000 0:/pit/friendsave.bin
 cp -w -o -s -n 1:/data/$[SYSID0]/sysdata/0001000f/00000000 0:/pit/seedsave.bin
 cp -w -o -s -n 1:/data/$[SYSID0]/sysdata/00010022/00000000 0:/pit/activitylog.bin
 
-# Attempt to get system app sysdata
+# Attempt to copy system app sysdata
 find -o -s 1:/data/$[SYSID0]/sysdata/000202?8 MIIPLAZA
 set MIIPLAZA $[MIIPLAZA]/00000000
 cp -w -o -s -n $[MIIPLAZA] 0:/pit/miiplaza.bin
@@ -125,6 +126,9 @@ elif find 1:/title/000400db/00017502 NULL
 	set CVREG 05
 elif find 1:/title/000400db/00017602 NULL
 	set CVREG 06
+else
+	echo "The CVer title does not exist.\nYour CTRTransfer image is probably corrupted.\n\nPress A to shut down, then please obtain\n a new CTRTransfer file."
+	poweroff
 end
 fget 1:/rw/sys/SecureInfo_A@100:1 SIREG
 
@@ -133,58 +137,37 @@ if chk -u $[CVREG] $[SIREG]
 	fset 1:/rw/sys/SecureInfo_C@100:1 $[CVREG]
 end
 
-# Restore all other preserved data
-# First, verify ticket.db has appropriate tickets
-if find 0:/pit/ticket.db NULL
-	imgmount 0:/pit/ticket.db
-	if find T:/system/0004003000008202.????????.tik NULL
-		set TIKREG 0
-	elif find T:/system/0004003000008F02.????????.tik NULL
-		set TIKREG 1
-	elif find T:/system/0004003000009802.????????.tik NULL
-		set TIKREG 2
-	elif find T:/system/000400300000A102.????????.tik NULL
-		set TIKREG 4
-	elif find T:/system/000400300000A902.????????.tik NULL
-		set TIKREG 5
-	elif find T:/system/000400300000B102.????????.tik NULL
-		set TIKREG 6
+
+# Restore backed-up system data if agreed to earlier
+if chk $[OPTRESTORE] 1
+	cp -w -o -s -n 0:/pit/seedsave.bin 1:/data/$[SYSID0]/sysdata/0001000f/00000000
+	cp -w -o -s -n 0:/pit/configsave.bin 1:/data/$[SYSID0]/sysdata/00010017/00000000
+	cp -w -o -s -n 0:/pit/friendsave.bin 1:/data/$[SYSID0]/sysdata/00010032/00000000
+	cp -w -o -s -n 0:/pit/activitylog.bin 1:/data/$[SYSID0]/sysdata/00010022/00000000
+
+	# Restore system app sysdata
+	if chk $[CVREG] 00
+		set CHR 0
+	elif chk $[CVREG] 01
+		set CHR 1
+	elif chk $[CVREG] 02
+		set CHR 2
+	elif chk $[CVREG] 04
+		set CHR 6
+	elif chk $[CVREG] 05
+		set CHR 7
+	elif chk $[CVREG] 06
+		set CHR 8
 	end
-	imgumount
+	cp -w -o -s -n 0:/pit/miiplaza.bin 1:/data/$[SYSID0]/sysdata/000202$[CHR]8/00000000
+	cp -w -o -s -n 0:/pit/faceraiders.bin 1:/data/$[SYSID0]/sysdata/000202$[CHR]d/00000000
+	cp -w -o -s -n 0:/pit/argames.bin 1:/data/$[SYSID0]/sysdata/000202$[CHR]e/00000000
+
+	# Restore shared extdata
+	cp -w -o -s -n 0:/pit/01 1:/data/$[SYSID0]/extdata/00048000/f0000001 # Photos
+	cp -w -o -s -n 0:/pit/02 1:/data/$[SYSID0]/extdata/00048000/f0000002 # Sounds
+	cp -w -o -s -n 0:/pit/0b 1:/data/$[SYSID0]/extdata/00048000/f000000b # MiiMaker, Game Coins, etc.
 end
-
-# Attempt restoring ticket.db if it has appropriate tickets
-if chk $[CVREG] $[TIKREG]
-	cp -w -o -s -n 0:/pit/ticket.db 1:/dbs/ticket.db
-end
-
-cp -w -o -s -n 0:/pit/seedsave.bin 1:/data/$[SYSID0]/sysdata/0001000f/00000000
-cp -w -o -s -n 0:/pit/configsave.bin 1:/data/$[SYSID0]/sysdata/00010017/00000000
-cp -w -o -s -n 0:/pit/friendsave.bin 1:/data/$[SYSID0]/sysdata/00010032/00000000
-cp -w -o -s -n 0:/pit/activitylog.bin 1:/data/$[SYSID0]/sysdata/00010022/00000000
-
-# Restore system app sysdata
-if chk $[CVREG] 00
-    set CHR 0
-elif chk $[CVREG] 01
-    set CHR 1
-elif chk $[CVREG] 02
-    set CHR 2
-elif chk $[CVREG] 04
-    set CHR 6
-elif chk $[CVREG] 05
-    set CHR 7
-elif chk $[CVREG] 06
-    set CHR 8
-end
-cp -w -o -s -n 0:/pit/miiplaza.bin 1:/data/$[SYSID0]/sysdata/000202$[CHR]8/00000000
-cp -w -o -s -n 0:/pit/faceraiders.bin 1:/data/$[SYSID0]/sysdata/000202$[CHR]d/00000000
-cp -w -o -s -n 0:/pit/argames.bin 1:/data/$[SYSID0]/sysdata/000202$[CHR]e/00000000
-
-# Restore shared extdata
-cp -w -o -s -n 0:/pit/01 1:/data/$[SYSID0]/extdata/00048000/f0000001 # Photos
-cp -w -o -s -n 0:/pit/02 1:/data/$[SYSID0]/extdata/00048000/f0000002 # Sounds
-cp -w -o -s -n 0:/pit/0b 1:/data/$[SYSID0]/extdata/00048000/f000000b # MiiMaker, Game Coins, etc.
 
 # Fix SYSNAND CTRNAND CMACs
 set ERRORMSG "Failed to fix 1:/dbs CMACs."
@@ -197,6 +180,8 @@ fixcmac 1:/private
 # Wrap up
 set ERRORMSG "Reboot canceled."
 ask "Manual CTRTransfer complete.\n \nRemove backup files and reboot now?"
-rm -o -s 0:/pit
+if chk $[OPTRESTORE] 1
+	rm -o -s 0:/pit
+end
 rm -o -s 0:/gm9/scripts/manual_transfer.gm9
 reboot
