@@ -7,8 +7,14 @@ include "header.php";
 include "nav.php";
 ?>
 <?php 
-// Include form submission script 
-include_once 'submit.php'; 
+$formConfig = [
+  'toEmail'   => 'eip@eiphax.tech',
+  'fromName'  => '3ds contact',
+  'formEmail' => 'form@eiphax.tech',
+  'subject'   => 'New submission from 3DS FORM',
+];
+
+require '/var/www/eipmain/lib/submit.php';
 ?>
         <div class="container">
         <div class="content">
