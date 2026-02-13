@@ -25,32 +25,32 @@ require '/var/www/eipmain/lib/submit.php';
         <div class="status-msg" role="status" aria-live="polite" <?php echo empty($statusMsg) ? 'hidden' : ''; ?>>
           <?php if (!empty($statusMsg)) echo $statusMsg; ?>
         </div>
-
+<br />
         <label>
           Name
           <input name="name" required autocomplete="name"
                  value="<?php echo isset($_POST['name']) ? htmlspecialchars($_POST['name'], ENT_QUOTES, 'UTF-8') : ''; ?>">
         </label>
-
+<br />
         <label>
           Email
           <input type="email" name="email" required autocomplete="email"
                  value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8') : ''; ?>">
         </label>
-
+<br />
         <label>
           Subject
           <input type="text" name="usersubject" required autocomplete="off" placeholder="Enter subject"
                  value="<?php echo isset($_POST['usersubject']) ? htmlspecialchars($_POST['usersubject'], ENT_QUOTES, 'UTF-8') : ''; ?>">
         </label>
-
+<br />
         <label>
           Message
           <textarea name="message" rows="6" required><?php
             echo isset($_POST['message']) ? htmlspecialchars($_POST['message'], ENT_QUOTES, 'UTF-8') : '';
           ?></textarea>
         </label>
-
+<br />
         <input type="hidden" name="token" value="">
         <!-- honeypot + time gate -->
         <label class="hp" aria-hidden="true"
